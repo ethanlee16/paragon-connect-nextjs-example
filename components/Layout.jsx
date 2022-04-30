@@ -24,6 +24,11 @@ const Layout = ({ children, title }) => {
             Integrations
           </a>
         </Link>
+        <Link href="/picker">
+          <a className={router.asPath === "/picker" ? styles.active : ""}>
+            File Picker
+          </a>
+        </Link>
       </nav>
       {children}
     </div>
