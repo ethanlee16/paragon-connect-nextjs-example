@@ -8,28 +8,20 @@ const SHOPIFY_SCOPES = 'read_content read_fulfillments read_script_tags write_fu
 const REDIRECT_URL = 'https://w4tdtq-3000.csb.app/integrations/shopify';
 
 export default function Integrations({ paragonUserToken }) {
-  const { user, paragon, initParagon } = useParagon(paragonUserToken);
+  const { user, paragon } = useParagon(paragonUserToken);
 
+  // Shopify Initial Redirect implementation
   useEffect(() => {
-    let handler = (event) => {
-      console.log(event.data);
-      if (event.data.type === "COMPLETE_INSTALL") {
-        initParagon();
-      }
-    };
-
-    window.addEventListener("message", handler);
-    return () => {
-      window.removeEventListener("message", handler);
-    };
-  }, [initParagon]);
+    let params = new URLSearchParams(window.location.search);
+    // If the `shop` query parameter is present, start the Shopify OAuth flow
+    if (params.get("shop")) {
+      window.location = `https://${params.get("shop")}/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${SHOPIFY_SCOPES}`;
+    }
+  }, []);
 
   useEffect(() => {
     if (window.location.search) {
       let params = new URLSearchParams(window.location.search);
-      if (params.get("shop")) {
-        window.location = `https://${params.get("shop")}.myshopify.com/admin/oauth/authorize?client_id=${SHOPIFY_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${SHOPIFY_SCOPES}`;
-      }
       if (params.get("pipedrive_install") && paragon) {
         paragon.connect("pipedrive");
       }

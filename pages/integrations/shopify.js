@@ -10,6 +10,7 @@ export default function InstallShopify({ paragonUserToken }) {
   const { paragon } = useParagon(paragonUserToken);
   const router = useRouter();
 
+  // Shopify Redirect Callback implementation
   useEffect(() => {
     if (window.location.search && paragon) {
       let params = new URLSearchParams(window.location.search);
