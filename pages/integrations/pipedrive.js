@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 
 // The URL of your Pipedrive Redirect Page
 const PIPEDRIVE_REDIRECT_URL = "https://w4tdtq-3000.csb.app/integrations/pipedrive";
+// If using an on-prem installation, change this to your instance's Connect service hostname
+const PARAGON_CONNECT_ORIGIN = "https://connect.useparagon.com";
 
 export default function InstallPipedrive({ paragonUserToken }) {
   const { paragon } = useParagon(paragonUserToken);
@@ -23,7 +25,7 @@ export default function InstallPipedrive({ paragonUserToken }) {
               authorizationCode,
               redirectUrl: PIPEDRIVE_REDIRECT_URL
             } ]
-          }, 'https://cuatro-connect.paragonsandbox.com');
+          }, PARAGON_CONNECT_ORIGIN);
           window.close();
         } else {
           // If the install flow begins in the Pipedrive Marketplace/install link
