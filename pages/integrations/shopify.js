@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import useParagon from "../../hooks/useParagon";
 
-// The URL of your Shhopfy Redirect Page
+// The URL of your Shopify Redirect Page
 const SHOPIFY_REDIRECT_URL = "https://w4tdtq-3000.csb.app/integrations/shopify";
 
 export default function InstallShopify({ paragonUserToken }) {
