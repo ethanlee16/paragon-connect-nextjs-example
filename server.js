@@ -26,7 +26,7 @@ function generateParagonUserToken(userId) {
 // return their user details. Here, we use a static value for the demo.
 function getLoggedInUser() {
   const user = {
-    id: "1f45e694-977a-474c-b630-da5c7839ad94",
+    id: "test-id",
     name: "Sean Victory",
   };
   user.paragonUserToken = generateParagonUserToken(user.id);
