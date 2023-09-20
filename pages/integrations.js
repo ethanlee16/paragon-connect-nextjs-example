@@ -1,11 +1,9 @@
 import Layout from "../components/Layout";
-import useGoogleGlobal from "../hooks/useGoogleGlobal";
-import useParagonGlobal from "../hooks/useParagonGlobal";
+import useParagon from "../hooks/useParagon";
 import styles from "../styles/Integrations.module.css";
 
 export default function Integrations({ paragonUserToken }) {
-  const paragon = useParagonGlobal(paragonUserToken);
-  const google = useGoogleGlobal("asdf")
+  const { paragon } = useParagon(paragonUserToken);
 
   // Get all integrations for this Paragon project to render their names and icons
   const integrations = paragon?.getIntegrationMetadata() || [];
