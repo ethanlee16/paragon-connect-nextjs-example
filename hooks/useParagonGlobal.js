@@ -7,7 +7,7 @@ export default function useParagonGlobal(paragonUserToken) {
     if (paragonUserToken) {
       await paragon.authenticate(
         process.env.NEXT_PUBLIC_PARAGON_PROJECT_ID,
-        paragonUserToken
+        paragonUserToken,
       );
     }
     setParagonReady(true);

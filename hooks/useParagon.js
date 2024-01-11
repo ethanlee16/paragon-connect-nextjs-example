@@ -3,7 +3,11 @@ import { useCallback, useEffect, useState } from "react";
 export default function useParagon(paragonUserToken) {
   const [user, setUser] = useState({ authenticated: false });
   const [error, setError] = useState();
-  const [paragonReady, setParagonReady] = useState(false);
+  const [paragonReady, setParagonReady] = useState(
+    (typeof window !== "undefined" &&
+      window?.paragon?.getUser().authenticated) ??
+      false,
+  );
 
   const initParagon = useCallback(async () => {
     if (paragonUserToken) {
@@ -21,8 +25,7 @@ export default function useParagon(paragonUserToken) {
         initParagon();
       } else {
         const paragonSrc = document.createElement("script");
-        paragonSrc.src =
-          "https://ocho-connect.paragonsandbox.com/ui/scripts/sdk.js";
+        paragonSrc.src = "https://cdn.useparagon.com/latest/sdk/index.js";
         paragonSrc.onload = initParagon;
         document.body.appendChild(paragonSrc);
       }
