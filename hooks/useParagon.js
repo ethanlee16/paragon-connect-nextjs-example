@@ -21,7 +21,7 @@ export default function useParagon(paragonUserToken) {
         initParagon();
       } else {
         const paragonSrc = document.createElement("script");
-        paragonSrc.src = "https://cuatro-connect.paragonsandbox.com/ui/scripts/sdk.js";
+        paragonSrc.src = "https://connect.useparagon.com/ui/scripts/sdk.js";
         paragonSrc.onload = initParagon;
         document.body.appendChild(paragonSrc);
       }

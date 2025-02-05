@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Layout from "../../components/Layout";
 import useParagon from "../../hooks/useParagon";
 import styles from "../../styles/Integrations.module.css";
+import { PIPEDRIVE_REDIRECT_URL } from './pipedrive';
 
 const SHOPIFY_CLIENT_ID = '9816ebc9a91fa843d80505b8e56ca19e';
 const SHOPIFY_SCOPES = 'read_content read_fulfillments read_script_tags write_fulfillments';
@@ -48,7 +49,7 @@ export default function Integrations({ paragonUserToken }) {
               <button onClick={() => {
                 if (integration.type === "pipedrive") {
                   paragon.connect("pipedrive", {
-                    overrideRedirectUrl: "https://w4tdtq-3000.csb.app/integrations/pipedrive"
+                    overrideRedirectUrl: PIPEDRIVE_REDIRECT_URL
                   });
                 } else {
                   paragon.connect(integration.type);

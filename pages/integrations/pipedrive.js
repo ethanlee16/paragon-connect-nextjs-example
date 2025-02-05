@@ -3,7 +3,7 @@ import useParagon from "../../hooks/useParagon";
 import { useRouter } from 'next/router';
 
 // The URL of your Pipedrive Redirect Page
-const PIPEDRIVE_REDIRECT_URL = "https://w4tdtq-3000.csb.app/integrations/pipedrive";
+export const PIPEDRIVE_REDIRECT_URL = "http://localhost:3000/integrations/pipedrive";
 // If using an on-prem installation, change this to your instance's Connect service hostname
 const PARAGON_CONNECT_ORIGIN = "https://connect.useparagon.com";
 
