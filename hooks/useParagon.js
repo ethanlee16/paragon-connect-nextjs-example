@@ -11,6 +11,7 @@ export default function useParagon(paragonUserToken) {
         process.env.NEXT_PUBLIC_PARAGON_PROJECT_ID,
         paragonUserToken
       );
+      setUser(paragon.getUser())
       setParagonReady(true);
     }
   }, [paragonUserToken]);

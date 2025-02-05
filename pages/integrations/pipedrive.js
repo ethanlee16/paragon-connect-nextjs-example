@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import useParagon from "../../hooks/useParagon";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 // The URL of your Pipedrive Redirect Page
-export const PIPEDRIVE_REDIRECT_URL = "http://localhost:3000/integrations/pipedrive";
+export const PIPEDRIVE_REDIRECT_URL =
+  "http://localhost:3000/integrations/pipedrive";
 // If using an on-prem installation, change this to your instance's Connect service hostname
 const PARAGON_CONNECT_ORIGIN = "https://connect.useparagon.com";
 
@@ -16,30 +17,23 @@ export default function InstallPipedrive({ paragonUserToken }) {
       let params = new URLSearchParams(window.location.search);
       let authorizationCode = params.get("code");
       if (authorizationCode) {
-        if (window.opener) {
-          // If the install flow begins in the Connect Portal
-          window.opener.postMessage({
-            messageType: 'SDK_FUNCTION_INVOCATION',
-            type:'completeInstall',
-            parameters: ['pipedrive', {
-              authorizationCode,
-              redirectUrl: PIPEDRIVE_REDIRECT_URL
-            } ]
-          }, PARAGON_CONNECT_ORIGIN);
-          window.close();
-        } else {
-          // If the install flow begins in the Pipedrive Marketplace/install link
-          paragon.completeInstall("pipedrive", {
+        paragon
+          .completeInstall("pipedrive", {
             authorizationCode,
-            redirectUrl: PIPEDRIVE_REDIRECT_URL
-          }).then(() => {
-              // Redirect to integrations page
-              router.push('/integrations?pipedrive_install=true');
+            redirectUrl: PIPEDRIVE_REDIRECT_URL,
+          })
+          .then(() => {
+            if (window.opener) {
+              // TODO: Notify your main window that the integration is installed
+              window.close();
+            } else {
+              // If Pipedrive Marketplace-origin install: redirect to integrations page
+              router.push("/integrations?pipedrive_install=true");
+            }
           });
-        }
       }
     }
   }, [paragon]);
 
-  return "Connecting Pipedrive..."
-};
+  return "Connecting Pipedrive...";
+}
